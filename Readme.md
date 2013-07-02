@@ -223,7 +223,7 @@ We see that this intent was not recognize correctly by the system. To fix this p
 [Wit Console Inbox][console_inbox] and correct the system on the user text we just entered. At the same time we
 will add some variations for this new intent by going to the [Wit intent page][console_intent]
 
-> <img src="http://127.0.0.1:8000/img/fix_joke.png" alt="Fix Joke" style="width: 600px;"/>
+> <img src="https://raw.github.com/wit-ai/wit-demo/gh-pages/img/fix_joke.png" alt="Fix Joke" style="width: 600px;"/>
 
 Let's add those following variations :
 
@@ -231,7 +231,7 @@ Let's add those following variations :
  * do you know a joke
  * do you know something fun
 
-> <img src="http://127.0.0.1:8000/img/add_variations_joke.png" alt="Fix Joke" style="width: 600px;"/>
+> <img src="https://raw.github.com/wit-ai/wit-demo/gh-pages/img/add_variations_joke.png" alt="Fix Joke" style="width: 600px;"/>
 
 And let's ask again our local server [Joke Request][localserver_joke]. We see that the user text was now correctly
 interpreted byt Wit.
@@ -342,24 +342,24 @@ tell the system that this word defined the category of the joke. We call it a sl
 popin appears. The second popin is here to defined the type of the slot. Here we want a new type not listed yet.
 We then write 'joke_categories' as a type and press enter.
 
-> <img src="http://127.0.0.1:8000/img/add_variation_slot_category.png" alt="Fix Joke" style="width: 600px;"/>
+> <img src="https://raw.github.com/wit-ai/wit-demo/gh-pages/img/add_variation_slot_category.png" alt="Fix Joke" style="width: 600px;"/>
 
 A new line is added to the variation's page and we have now
 to tell the system the value of the category that correspond to the word nerdy. As we are lazy we decide to call it
 'nerdy'. Now we validate our variation and go to the second variation 'do you have any explicit joke?' by clicking on it.
 
-> <img src="http://127.0.0.1:8000/img/variation_added_with_slot_displayed.png" alt="Fix Joke" style="width: 600px;"/>
+> <img src="https://raw.github.com/wit-ai/wit-demo/gh-pages/img/variation_added_with_slot_displayed.png" alt="Fix Joke" style="width: 600px;"/>
 
 We do the same for the 'explicit' word present in the variation. As we already gave information about the type of the
 'category' slot the system doesn't ask us again. We just have to select the type and enter the value for this word.
 Again let's be lazy and put explicit as the value and validate our variation.
 
-> <img src="http://127.0.0.1:8000/img/2nd_variation_with_slot.png" alt="Fix Joke" style="width: 600px;"/>
+> <img src="https://raw.github.com/wit-ai/wit-demo/gh-pages/img/2nd_variation_with_slot.png" alt="Fix Joke" style="width: 600px;"/>
 
 Let's add another variation 'Do you have any joke about nerds and chuck?' and select the word nerds which will be a
 'category' slot and the value will be 'nerdy' as it means the same for the end system.
 
-> <img src="http://127.0.0.1:8000/img/3rd_variation_with_slot_and_same_value.png" alt="Fix Joke" style="width: 600px;"/>
+> <img src="https://raw.github.com/wit-ai/wit-demo/gh-pages/img/3rd_variation_with_slot_and_same_value.png" alt="Fix Joke" style="width: 600px;"/>
 
 Now let's try this with the system. In the [console][console] you are always invited to test some sentence to check
 if the system works properly with your current configuration. You have a 'Try out a sentence' box where for our example
@@ -367,7 +367,7 @@ we will type 'Do you have any nerds joke ?'. The system recognize immediatly tha
 'tell joke' and find out that there was a category added as well. It recognize the value of the category to be 'nerdy'
 which is exactly what we want.
 
-> <img src="http://127.0.0.1:8000/img/test_sentence_for_slot.png" alt="Fix Joke" style="width: 600px;"/>
+> <img src="https://raw.github.com/wit-ai/wit-demo/gh-pages/img/test_sentence_for_slot.png" alt="Fix Joke" style="width: 600px;"/>
 
 The next step is to use this information in our application to request specific joke based on the slot category.
 When you request the sentence 'Do you have any nerds joke ?' directly to Wit API you will get in response the following
@@ -475,7 +475,7 @@ recognized the date in the input and give us the value of this date.
 
 If we request the same using the [console ui][console] we can see that the correct group of word have been recognized
 
->  <img src="http://127.0.0.1:8000/img/joke_datetime_ui_example.png" alt="Fix Joke" style="width: 600px;"/>
+>  <img src="https://raw.github.com/wit-ai/wit-demo/gh-pages/img/joke_datetime_ui_example.png" alt="Fix Joke" style="width: 600px;"/>
 
 You can now try it for yourself and implement the server that would send you a joke at the time asked.
 
