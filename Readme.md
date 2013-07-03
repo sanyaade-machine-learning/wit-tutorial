@@ -65,7 +65,7 @@ var http = require('http');
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Hello World\n');
-}).listen(8766, '127.0.0.1');
+}).listen(8766);
 
 console.log('Server running at http://127.0.0.1:8766/');
 ```
@@ -170,7 +170,7 @@ http.createServer(function (req, res) {
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(JSON.stringify(response));
     });
-}).listen(8766, '127.0.0.1');
+}).listen(8766);
 
 console.log('Server running at http://127.0.0.1:8766/');
 ```
@@ -306,7 +306,7 @@ http.createServer(function (req, res) {
         }
 
     });
-}).listen(8766, '127.0.0.1');
+}).listen(8766);
 
 console.log('Server running at http://127.0.0.1:8766/');
 ```
@@ -495,12 +495,63 @@ by heroku)
 
 We just add to push on the heroku git repository and the application was instantly deployed and running for us to access
 
+[Joke from Heroku server >][heroku_joke]
 
+Now that our server is setup in heroku we will be able to integrate twilio quite easily.
 
 Twilio integration
 ------------------
 
-The next step for our service is to be integrated to Twilio to receive and send SMS.
+The next step for our service is to be integrated to Twilio to receive and send SMS. Twilio is able to forward a text
+message to a web service. To do so go into your [Twilio account][twilio_account], click on your phone number and
+set the SMS Request URL to be your heroku url. In our case we have put `http://wit-demo.herokuapp.com/` and change the
+method to `GET`
+
+Twilio is going to send us a request using a specific format so we have to change the `app.js` file to manage this
+format. The format is quite simple and is describe [here][twilio_request]. Here is our new app.js containing changes
+for heroku and to read twilio request. The principal changes are that the sms will be pass as a query parameter with
+the name 'Body', and that we want to save the phone number of the one who send the SMS. We will reply twilio http
+request using a basic text answer (like we always have) as define [here][twilio_response].
+
+```javascript
+var http = require('http');
+var wit = require('./wit');
+var joke = require('./joke');
+var url = require('url');
+
+var port = process.env.PORT || 8766;
+
+http.createServer(function (req, res) {
+    var queryObject = url.parse(req.url, true).query;
+    console.log(JSON.stringify(queryObject));
+    var wit_request = wit.request_wit(queryObject.Body);
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    wit_request.when(function (err, wit) {
+        if (err) console.log(err)//Manage Error here
+        switch (wit.outcome.intent) {
+            case "hello":
+                res.end("Hello, how are you?");
+                break;
+            case "tell_joke":
+                var cat;
+                if (wit.outcome.slots.length == 1 && wit.outcome.slots[0].type == "joke categories") {
+                    cat = wit.outcome.slots[0].value;
+                }
+                joke.get_joke(cat).when(function (err, the_joke) {
+                    res.end(the_joke);
+                });
+                break;
+            default:
+                res.end(JSON.stringify(wit));
+        }
+    });
+}).listen(port);
+
+console.log('Server running at http://127.0.0.1:' + port);
+```
+
+And now we are able to send text message to +1 415-767-1948
+
 
 [localserver]: http://127.0.0.1:8766/
 [localserver_hello]: http://127.0.0.1:8766/?text=Hello%20World
@@ -508,6 +559,7 @@ The next step for our service is to be integrated to Twilio to receive and send 
 [localserver_joke_nerdy]: http://127.0.0.1:8766/?text=Do%20you%20have%20any%20nerds%20joke%20%3F
 [localserver_joke_explicit]: http://127.0.0.1:8766/?text=any%20explicit%20joke%20in%20stock%3F
 [localserver_funny]: http://127.0.0.1:8766/?text=a%20joke%20please
+[heroku_joke]: http://wit-demo.herokuapp.com/?text=Do%20you%20have%20any%20nerds%20joke%20%3F
 [console]: https://console.wit.ai/
 [console_settings]: https://console.wit.ai/#/settings
 [console_inbox]: https://console.wit.ai/#/inbox
@@ -515,3 +567,5 @@ The next step for our service is to be integrated to Twilio to receive and send 
 [future]: https://github.com/coolaj86/futures/tree/v2.0/future
 [icndb]: http://www.icndb.com/api/
 [heroku_nodejs]: https://devcenter.heroku.com/articles/nodejs
+[twilio_request]: http://www.twilio.com/docs/api/twiml/twilio_request
+[twilio_response]: http://www.twilio.com/docs/api/twiml/sms/your_response

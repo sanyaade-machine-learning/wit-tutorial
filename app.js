@@ -7,7 +7,8 @@ var port = process.env.PORT || 8766;
 
 http.createServer(function (req, res) {
     var queryObject = url.parse(req.url, true).query;
-    var wit_request = wit.request_wit(queryObject.text);
+    console.log(JSON.stringify(queryObject));
+    var wit_request = wit.request_wit(queryObject.Body);
     res.writeHead(200, {'Content-Type': 'text/plain'});
     wit_request.when(function (err, wit) {
         if (err) console.log(err)//Manage Error here
