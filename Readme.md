@@ -523,7 +523,6 @@ var port = process.env.PORT || 8766;
 
 http.createServer(function (req, res) {
     var queryObject = url.parse(req.url, true).query;
-    console.log(JSON.stringify(queryObject));
     var wit_request = wit.request_wit(queryObject.Body);
     res.writeHead(200, {'Content-Type': 'text/plain'});
     wit_request.when(function (err, wit) {
@@ -550,7 +549,7 @@ http.createServer(function (req, res) {
 console.log('Server running at http://127.0.0.1:' + port);
 ```
 
-And now we are able to send text message to +1 415-767-1948
+And now we are able to send text message to +1 415-767-1948 and Enjoy !
 
 
 [localserver]: http://127.0.0.1:8766/
