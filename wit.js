@@ -11,6 +11,7 @@ var request_wit = function(user_text) {
         //in the demo this access token was equals to FSN2DG6YY64JD2T6WG5D6NVIXWU2F2QK
         headers: {'Authorization': 'Bearer ' + process.env.ACCESS_TOKEN}
     };
+    console.log("Calling Wit API with options : " + JSON.stringify(options));
     https.request(options, function(res) {
         var response = '';
         res.on('data', function (chunk) {response += chunk;});
