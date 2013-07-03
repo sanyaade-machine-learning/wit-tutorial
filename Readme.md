@@ -508,8 +508,10 @@ set the SMS Request URL to be your heroku url. In our case we have put `http://w
 method to `GET`
 
 Twilio is going to send us a request using a specific format so we have to change the `app.js` file to manage this
-format. The format is quite simple and is describe [here][twilio_request]. Here is our new app.js containing changes
-for heroku and to read twilio request. The principal changes are that the sms will be pass as a query parameter with
+format. The format is quite simple and is describe [here][twilio_request].
+
+Here is our new app.js containing changes for heroku and to read twilio request.
+The principal changes are that the sms will be pass as a query parameter with
 the name 'Body', and that we want to save the phone number of the one who send the SMS. We will reply twilio http
 request using a basic text answer (like we always have) as define [here][twilio_response].
 
@@ -566,5 +568,6 @@ And now we are able to send text message to +1 415-767-1948 and Enjoy !
 [future]: https://github.com/coolaj86/futures/tree/v2.0/future
 [icndb]: http://www.icndb.com/api/
 [heroku_nodejs]: https://devcenter.heroku.com/articles/nodejs
+[twilio_account]: https://www.twilio.com/user/account/phone-numbers/incoming
 [twilio_request]: http://www.twilio.com/docs/api/twiml/twilio_request
 [twilio_response]: http://www.twilio.com/docs/api/twiml/sms/your_response
