@@ -483,7 +483,19 @@ Heroku integration
 ------------------
 
 We will quickly deploy our application on heroku so we are able to respond to request not only locally.
-To do so
+To do so we followed most of [this article][heroku_nodejs] after creating an account and an application we added our
+files (we had to change slightly the app.js to manage the port set in the environment variable as it is mandatory
+by heroku)
+
+> * app.js
+> * package.json
+> * wit.js
+> * joke.js
+> * Procfile
+
+We just add to push on the heroku git repository and the application was instantly deployed and running for us to access
+
+
 
 Twilio integration
 ------------------
@@ -502,3 +514,4 @@ The next step for our service is to be integrated to Twilio to receive and send 
 [console_intent]: https://console.wit.ai/#/intents/tell_joke
 [future]: https://github.com/coolaj86/futures/tree/v2.0/future
 [icndb]: http://www.icndb.com/api/
+[heroku_nodejs]: https://devcenter.heroku.com/articles/nodejs
