@@ -87,7 +87,7 @@ To stop your server you need to kill the node application `ctrl-c` inside your t
 Request to Wit API
 ------------------
 
-The Wit API has been build based on a single endpoint :
+The Wit API has been built based on a single endpoint :
 
 ``` html
 https://api.wit.ai/
@@ -96,7 +96,7 @@ https://api.wit.ai/
 ### Authentication
 
 Wit API is using an OAuth authentication system. Every request should contains the Authorization header containing your
-acccess token that can be found in [Wit Console > Settings page][console_settings]
+access token that can be found in [Wit Console > Settings page][console_settings]
 
 The Header of all your http request against Wit API should look like :
 
@@ -120,7 +120,7 @@ and Wit will interpret this user text to a machine meaning.
 ```
 
 We will now change our node.js application to request wit for every request made on our server.
-To make the code clearer we create another file using the following command form the root of our nodejs application
+To make the code clearer we create another file using the following command from the root of our nodejs application
 
 ``` bash
 wit-demo$ touch wit.js
@@ -364,7 +364,7 @@ Let's add another variation 'Do you have any joke about nerds and chuck?' and se
 
 Now let's try this with the system. In the [console][console] you are always invited to test some sentence to check
 if the system works properly with your current configuration. You have a 'Try out a sentence' box where for our example
-we will type 'Do you have any nerds joke ?'. The system recognize immediatly that the intent of this sentence is
+we will type 'Do you have any nerds joke ?'. The system recognize immediately that the intent of this sentence is
 'tell joke' and find out that there was a category added as well. It recognize the value of the category to be 'nerdy'
 which is exactly what we want.
 
