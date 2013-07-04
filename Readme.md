@@ -12,8 +12,9 @@ Prerequisites
 
 To access the Wit API :
 
- * [Wit account](https://wit.ai/)
- * [Twilio account](http://www.twilio.com/) (optional if no sms needed)
+ * [Wit account][wit]
+ * [Heroku account][heroku] (to deploy your application)
+ * [Twilio account][twilio] (optional if no sms needed)
 
 For the server implementation you will need :
 
@@ -164,7 +165,7 @@ var url = require('url');
 
 http.createServer(function (req, res) {
     var queryObject = url.parse(req.url,true).query;
-    var wit_request = wit.request_wit(queryObject.text);
+    var wit_request = wit.request_wit(queryObject.Body);
     wit_request.when(function(err, response){
         if (err) console.log(err)//Manage Error here
         res.writeHead(200, {'Content-Type': 'application/json'});
@@ -219,7 +220,7 @@ Now we need to make our server answer a joke whenever the user ask for one. Let'
 }
 ```
 
-We see that this intent was not recognize correctly by the system. To fix this problem you need go into your
+We see that this intent was not recognized correctly by the system. To fix this problem you need go into your
 [Wit Console Inbox][console_inbox] and correct the system on the user text we just entered. At the same time we
 will add some variations for this new intent by going to the [Wit intent page][console_intent]
 
@@ -289,7 +290,7 @@ var url = require('url');
 
 http.createServer(function (req, res) {
     var queryObject = url.parse(req.url,true).query;
-    var wit_request = wit.request_wit(queryObject.text);
+    var wit_request = wit.request_wit(queryObject.Body);
     res.writeHead(200, {'Content-Type': 'text/plain'});
     wit_request.when(function(err, wit){
         if (err) console.log(err)//Manage Error here
@@ -511,9 +512,7 @@ Twilio is going to send us a request using a specific format so we have to chang
 format. The format is quite simple and is describe [here][twilio_request].
 
 Here is our new app.js containing changes for heroku and to read twilio request.
-The principal changes are that the sms will be pass as a query parameter with
-the name 'Body', and that we want to save the phone number of the one who send the SMS. We will reply twilio http
-request using a basic text answer (like we always have) as define [here][twilio_response].
+We will reply twilio http request using a basic text answer (like we always have) as define [here][twilio_response].
 
 ```javascript
 var http = require('http');
@@ -554,13 +553,16 @@ console.log('Server running at http://127.0.0.1:' + port);
 And now we are able to send text message to +1 415-767-1948 and Enjoy !
 
 
+[wit]: https://www.wit.ai/
+[twilio]: https://www.twilio.com/
+[heroku]: https://www.heroku.com/
 [localserver]: http://127.0.0.1:8766/
-[localserver_hello]: http://127.0.0.1:8766/?text=Hello%20World
-[localserver_joke]: http://127.0.0.1:8766/?text=give%20me%20a%20joke
-[localserver_joke_nerdy]: http://127.0.0.1:8766/?text=Do%20you%20have%20any%20nerds%20joke%20%3F
-[localserver_joke_explicit]: http://127.0.0.1:8766/?text=any%20explicit%20joke%20in%20stock%3F
-[localserver_funny]: http://127.0.0.1:8766/?text=a%20joke%20please
-[heroku_joke]: http://wit-demo.herokuapp.com/?text=Do%20you%20have%20any%20nerds%20joke%20%3F
+[localserver_hello]: http://127.0.0.1:8766/?Body=Hello%20World
+[localserver_joke]: http://127.0.0.1:8766/?Body=give%20me%20a%20joke
+[localserver_joke_nerdy]: http://127.0.0.1:8766/?Body=Do%20you%20have%20any%20nerds%20joke%20%3F
+[localserver_joke_explicit]: http://127.0.0.1:8766/?Body=any%20explicit%20joke%20in%20stock%3F
+[localserver_funny]: http://127.0.0.1:8766/?Body=a%20joke%20please
+[heroku_joke]: http://wit-demo.herokuapp.com/?Body=Do%20you%20have%20any%20nerds%20joke%20%3F
 [console]: https://console.wit.ai/
 [console_settings]: https://console.wit.ai/#/settings
 [console_inbox]: https://console.wit.ai/#/inbox
