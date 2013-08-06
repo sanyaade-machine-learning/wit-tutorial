@@ -17,8 +17,8 @@ http.createServer(function (req, res) {
                 break;
             case "tell_joke":
                 var cat;
-                if (wit.outcome.variables.category) {
-                    cat = wit.outcome.variables.category.value;
+                if (wit.outcome.entities.category) {
+                    cat = wit.outcome.entities.category.value;
                 }
                 joke.get_joke(cat).when(function (err, the_joke) {
                     res.end(the_joke);

@@ -1,6 +1,6 @@
 {
-    "name": "wit-demo",
-    "description": "wit app demo",
+    "name": "wit-tutorial",
+    "description": "wit app tutorial",
     "version": "0.0.1",
     "private": true,
     "dependencies"  : {
