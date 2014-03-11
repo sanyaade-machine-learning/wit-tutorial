@@ -6,6 +6,9 @@ var url = require('url');
 var port = process.env.PORT || 8766;
 
 http.createServer(function (req, res) {
+    if (req.url === '/favicon.ico') {
+        return;
+    }
     var queryObject = url.parse(req.url, true).query;
     var wit_request = wit.request_wit(queryObject.Body);
     res.writeHead(200, {'Content-Type': 'text/plain'});
