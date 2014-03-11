@@ -1,2 +1,1 @@
-[Tutorial for Wit](https://wit.ai/docs/tutorial)
-======================
+[Tutorial for Wit](https://wit.ai/docs/nodejs-tutorial)
